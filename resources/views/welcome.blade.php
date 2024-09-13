@@ -46,7 +46,7 @@
 
         <!-- Kết quả tìm kiếm -->
         <div class="search-results">
-
+            @include('partical.sao_ke_table')
         </div>
         <h6 style="font-size:12px;">Email: hongtruongpham18@gmail.com </h6>
         <span style="font-size:12px; font-style:italic; color:red;">Copyright © 2024 Pham Hong Truong. All rights
