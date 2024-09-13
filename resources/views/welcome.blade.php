@@ -49,13 +49,7 @@
 
         </div>
         <h6 style="font-size:12px;">Email: hongtruongpham18@gmail.com </h6>
-<<<<<<< HEAD
         <span style="font-size:12px; font-style:italic; color:red;">Copyright © 2024 Pham Hong Truong. All rights
-=======
-        <span style="font-size:12px; font-style:italic; color:red;">Copyright © 2023-2024 Pham Hong Truong. All rights
->>>>>>> ac069c6f0d5bc916731ebed0085560645363a3f8
-            reserved.
-        </span>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
