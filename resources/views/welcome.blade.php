@@ -55,6 +55,12 @@
     </script>
     <script>
         $(document).ready(function() {
+            $('input[name="query"]').keypress(function(event) {
+                if (event.which == 13) { // 13 là mã phím Enter
+                    event.preventDefault(); // Ngăn việc submit form mặc định
+                    $('#searchSubmit').click(); // Tự động click vào nút Search
+                }
+            });
             $(document).on("click", ".pagination a", function(e) {
                 e.preventDefault();
                 const page = $(this).attr("href").split("page=")[1];

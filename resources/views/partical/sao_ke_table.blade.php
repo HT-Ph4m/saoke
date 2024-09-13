@@ -10,7 +10,7 @@
     <tbody>
         @if (count($logs) == 0)
             <tr>
-                <td colspan="3">Không có dữ liệu!</td>
+                <td colspan="4">Không có dữ liệu!</td>
             </tr>
         @else
             @foreach ($logs as $log)
