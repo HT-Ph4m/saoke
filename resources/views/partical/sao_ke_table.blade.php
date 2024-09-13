@@ -4,7 +4,7 @@
             <th scope="col">STT</th>
             <th scope="col">Date</th>
             <th scope="col">Money</th>
-            <th style="font-size:14px" scope="col">Noti</th>
+            <th style="font-size:14px" scope="col">Note</th>
         </tr>
     </thead>
     <tbody>
