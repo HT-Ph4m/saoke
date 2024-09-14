@@ -14,7 +14,7 @@
         }
 
         .search-container {
-            margin-top: 5%;
+            margin-top: 3%;
             text-align: center;
         }
 
@@ -85,8 +85,13 @@
 
 <body>
     <div class="container search-container">
-        {{-- <h1>Tổng tiền: {{ number_format($sumMoney, 0, ',', '.') }}</h1> --}}
-        <h1>TỔ VAR</h1>
+        <h1>Tổng tiền: {{ number_format($sumMoney, 0, ',', '.') }}</h1>
+        <h6>Bao gồm:
+            <a href="https://tinyurl.com/46kc3h4y" class="">Vietcombank</a>
+            <a href="https://tinyurl.com/mup295by" class="">Vietinbank</a>
+            <a href="https://tinyurl.com/bdhx6k2b" class="">Agribank+TrucTiep</a>
+        </h6>
+        {{-- <h1>TỔ VAR</h1> --}}
         <form id="searchForm" class="search-box">
             <div class="col-md col-date">
                 <label for="dateFrom" class="form-label">Từ ngày</label>
