@@ -4,7 +4,8 @@
             <th scope="col">STT</th>
             <th scope="col">Date</th>
             <th scope="col">Money</th>
-            <th style="font-size:14px" scope="col">Note</th>
+            <th style="font-size:12px" scope="col">Note</th>
+            <th style="font-size:12px" scope="col">Name</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +19,8 @@
                     <td>{{ $loop->index + 1 + $logs->perPage() * ($logs->currentPage() - 1) }}</td>
                     <td>{{ $log->date }}</td>
                     <td>{{ number_format($log->money, 0, ',', '.') }}</td>
-                    <td class="col-8">{{ $log->note }}</td>
+                    <td class="col-7">{{ $log->note }}</td>
+                    <td>{{ $log->username }}</td>
                 </tr>
             @endforeach
         @endif

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+        /* Các kiểu chung cho các ô tìm kiếm */
         body {
             background-color: #f8f9fa;
         }
@@ -18,8 +19,10 @@
         }
 
         .search-box {
-            width: 50%;
-            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
         }
 
         .search-results {
@@ -30,19 +33,87 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
+
+        .col-date {
+            flex: 0 0 12rem;
+            /* Chiều rộng cố định cho các ô ngày */
+        }
+
+        .col-other {
+            flex: 1;
+            /* Các ô khác sẽ chiếm toàn bộ chiều rộng còn lại */
+        }
+
+        @media (max-width: 767.98px) {
+            .col-date {
+                flex: 1 1 48%;
+                /* Chiều rộng của các ô ngày chung một hàng trong mobile */
+            }
+
+            .col-other {
+                flex: 1 1 100%;
+                /* Các ô tìm kiếm khác mỗi ô chiếm một hàng trong mobile */
+            }
+
+            .col-md-auto {
+                flex: 1 1 100%;
+                /* Nút tìm kiếm chiếm toàn bộ chiều rộng trong mobile view */
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+
+            .col-date {
+                flex: 1 1 48%;
+                /* Chiều rộng của các ô ngày chung một hàng trong mobile */
+            }
+
+            .col-other {
+                flex: 1 1 100%;
+                /* Các ô tìm kiếm khác mỗi ô chiếm một hàng trong mobile */
+            }
+
+            .col-md-auto {
+                flex: 1 1 100%;
+                /* Nút tìm kiếm chiếm toàn bộ chiều rộng trong mobile view */
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container search-container">
-        <h1>CHECK VAR</h1>
-        <div class="input-group search-box">
-            <input type="text" class="form-control" name="query" placeholder="Search..." required>
-            <button type="button" class="btn btn-outline-secondary" id="clearInput"
-                style="display: none;">&times;</button>
-            <button type="submit" id="searchSubmit" class="btn btn-primary">Search</button>
-        </div>
-
+        {{-- <h1>Tổng tiền: {{ number_format($sumMoney, 0, ',', '.') }}</h1> --}}
+        <h1>TỔ VAR</h1>
+        <form id="searchForm" class="search-box">
+            <div class="col-md col-date">
+                <label for="dateFrom" class="form-label">Từ ngày</label>
+                <input type="date" class="form-control" id="dateFrom" name="dateFrom">
+            </div>
+            <div class="col-md col-date">
+                <label for="dateTo" class="form-label">Đến ngày</label>
+                <input type="date" class="form-control" id="dateTo" name="dateTo">
+            </div>
+            <div class="col-md col-other">
+                <label for="number" class="form-label">Tiền</label>
+                <input type="number" class="form-control" id="number" name="number">
+            </div>
+            <div class="col-md col-other">
+                <label for="name" class="form-label">Tên</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="col-md col-other">
+                <label for="content" class="form-label">Nội dung</label>
+                <input type="text" class="form-control" id="content" name="content">
+            </div>
+            <div class="col-md-auto">
+                <button type="button" class="btn btn-outline-secondary" id="clearInput"
+                    style="display: none;">&times;</button>
+                <button type="submit" id="searchSubmit" class="btn btn-primary ms-2">Search</button>
+            </div>
+        </form>
 
         <!-- Kết quả tìm kiếm -->
         <div class="search-results">
@@ -59,7 +130,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $('input[name="query"]').on('input', function() {
+            $('#query').on('input', function() {
                 let keyword = $(this).val();
                 if (keyword.length > 0) {
                     $('#clearInput').show(); // Hiển thị nút "x"
@@ -67,12 +138,14 @@
                     $('#clearInput').hide(); // Ẩn nút "x"
                 }
             });
-            $('input[name="query"]').keypress(function(event) {
+
+            $('#query').keypress(function(event) {
                 if (event.which == 13) { // 13 là mã phím Enter
                     event.preventDefault(); // Ngăn việc submit form mặc định
                     $('#searchSubmit').click(); // Tự động click vào nút Search
                 }
             });
+
             $(document).on("click", ".pagination a", function(e) {
                 e.preventDefault();
                 const page = $(this).attr("href").split("page=")[1];
@@ -81,7 +154,7 @@
 
             // Xóa nội dung trong input khi nhấn vào nút "x"
             $('#clearInput').on('click', function() {
-                $('input[name="query"]').val(''); // Xóa input
+                $('#query').val(''); // Xóa input
                 $(this).hide(); // Ẩn nút "x"
             });
 
@@ -91,13 +164,23 @@
             });
 
             function getlogs(page) {
-                let keyword = $('input[name="query"]').val();
+                let dateFrom = $('#dateFrom').val();
+                let dateTo = $('#dateTo').val();
+                let number = $('#number').val();
+                let name = $('#name').val();
+                let content = $('#content').val();
+                let query = $('#query').val();
 
                 $.ajax({
                     url: "/search",
                     type: "GET",
                     data: {
-                        keyword: keyword,
+                        dateFrom: dateFrom,
+                        dateTo: dateTo,
+                        number: number,
+                        name: name,
+                        content: content,
+                        query: query,
                         page: page
                     },
                     success: function(result) {

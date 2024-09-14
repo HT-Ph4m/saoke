@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Search;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -11,6 +10,7 @@ class HomeController extends Controller
     {
         $logs = Search::latest()
             ->paginate(10);
-        return view('welcome', compact('logs'));
+        $sumMoney = Search::sum('money');
+        return view('welcome', compact(['logs', 'sumMoney']));
     }
 }
