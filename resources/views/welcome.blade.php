@@ -90,6 +90,7 @@
             <a href="https://tinyurl.com/46kc3h4y" class="">Vietcombank</a>
             <a href="https://tinyurl.com/mup295by" class="">Vietinbank</a>
             <a href="https://tinyurl.com/bdhx6k2b" class="">Agribank+TrucTiep</a>
+            <a href="https://tinyurl.com/43t76w5b" class="">BIDV(01-12)</a>
         </h6>
         {{-- <h1>TỔ VAR</h1> --}}
         <form id="searchForm" class="search-box">
