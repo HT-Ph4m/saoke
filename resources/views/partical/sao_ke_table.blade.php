@@ -11,7 +11,7 @@
     <tbody>
         @if (count($logs) == 0)
             <tr>
-                <td colspan="4">Không có dữ liệu!</td>
+                <td colspan="5">Không có dữ liệu!</td>
             </tr>
         @else
             @foreach ($logs as $log)
@@ -19,7 +19,7 @@
                     <td>{{ $loop->index + 1 + $logs->perPage() * ($logs->currentPage() - 1) }}</td>
                     <td>{{ $log->date }}</td>
                     <td>{{ number_format($log->money, 0, ',', '.') }}</td>
-                    <td class="col-8">{{ $log->note }}</td>
+                    <td class="col-6">{{ $log->note }}</td>
                     <td>{{ $log->username }}</td>
                 </tr>
             @endforeach
